@@ -15,7 +15,7 @@
             <?php }
         } ;?>
     <h1>Connexion</h1>
-    <form action="verif.php" method="POST">
+    <form action="verif.php" method="GET">
         <div class="user">
             <label for=""> Votre nom d'utilisateur: </label>
             <input name="pseudo" type="text">
