@@ -1,21 +1,16 @@
 <?php
-if($username !== "" && $password !== "")
-    {
-        $requete = "SELECT count(*) FROM utilisateur where 
-              nom_utilisateur = '".$username."' and mot_de_passe = '".$password."' ";
-        $count = $reponse['count(*)'];
-        if($count!=0) // nom d'utilisateur et mot de passe correctes
-        {
-           $_SESSION['username'] = $username;
-           header('Location: principale.php');
-        }
-        else
-        {
-           header('Location: login.php?erreur=1'); // utilisateur ou mot de passe incorrect
+if (isset($_POST["pseudo"]) && isset($_POST["mdp"])) {
+    $file = fopen('db.txt', 'r');
+    while (!feof($file)) {
+        $line = fgets($file);
+
+        list($user, $pass) = explode(';', $line);
+
+        if (trim($user) == $_POST['name'] && trim($pass) == $_POST['password']) {
+            header('location: login-reussi.html');
+        }else {
+            header('location:index.php?echec=true');
         }
     }
-    else
-    {
-       header('Location: login.php?erreur=2'); // utilisateur ou mot de passe vide
-    }
-?>
+    fclose($file);
+} 
